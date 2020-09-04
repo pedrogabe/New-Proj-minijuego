@@ -2,13 +2,13 @@ var iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, pla
 const tRex = document.querySelector('.t-rex');
 var interval = window.setInterval(function(){
     iteration++;
-    if(goingLeft==false && goingRight==false){
+    if(goingLeft==false && goingRight==false || goingLeft==true && goingRight==true){
         instance=0;
     }
     else {
-        if(iteration/5 % 2 === 0){
+        if(iteration/4 % 2 === 0){
             instance=1;
-        }else if (iteration/5 % 1 === 0){
+        }else if (iteration/4 % 1 === 0){
             instance=2;
         }
     }
