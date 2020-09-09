@@ -1,7 +1,27 @@
-var iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, playerX=1;
+var iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, goingUp=false, playerY=0, playerX=1;
 const tRex = document.querySelector('.t-rex');
 var interval = window.setInterval(function(){
     iteration++;
+    if(jumping){
+        instance=1;
+        if(goingUp==false && playerY==0){
+            goingUp=true;
+        }
+        if(playerY<100 && goingUp==true){
+            playerY+=4
+        }else{ 
+            if(playerY==100){
+                goingUp=false;
+            }
+            if(playerY>4 && goingUp==false){
+                playerY-=4
+            }else if(playerY==4){
+                jumping=false;
+                playerY-=4;
+            }
+        }
+        tRex.style.bottom=playerY+'px';
+    }else
     if(goingLeft==false && goingRight==false || goingLeft==true && goingRight==true){
         instance=0;
     }
@@ -34,6 +54,7 @@ window.addEventListener('keydown',function(e){
     switch(e.keyCode){
         case 37: direction=0; goingLeft=true; break;
         case 39: direction=1; goingRight=true; break;
+        case 38: jumping=true;break;
     }
 })
 
