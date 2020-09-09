@@ -33,7 +33,7 @@ var interval = window.setInterval(function(){
                 instance=2;
             }
         }
-        tRex.src="trex-"+instance+".png";
+        tRex.src="https://pedrogabe.github.io/New-Proj-minijuego/trex-"+instance+".png";
 
         if(direction==1){
             tRex.style.transform='rotateY(0deg)'
