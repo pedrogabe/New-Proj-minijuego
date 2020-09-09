@@ -1,26 +1,20 @@
 //GitHub check
-var paused=false, iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, goingUp=false, playerY=0, playerX=1;
+var paused=false, iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, goDown=false, speedUpwards=0, playerY=0, playerX=1;
 const tRex = document.querySelector('.t-rex');
 var interval = window.setInterval(function(){
     if(!paused){
         iteration++;
         if(jumping){
             instance=1;
-            if(goingUp==false && playerY==0){
-                goingUp=true;
-            }
-            if(playerY<100 && goingUp==true){
-                playerY+=4
-            }else{ 
-                if(playerY==100){
-                    goingUp=false;
-                }
-                if(playerY>4 && goingUp==false){
-                    playerY-=4
-                }else if(playerY==4){
-                    jumping=false;
-                    playerY-=4;
-                }
+            if(speedUpwards==0 && playerY==0){
+                speedUpwards=15
+            }else if(speedUpwards<0 && playerY==0){
+                jumping=false
+                speedUpwards=0;
+            }else{
+                speedUpwards-=1;
+                playerY+=speedUpwards;
+                console.log(playerY)
             }
             tRex.style.bottom=playerY+'px';
         }else
