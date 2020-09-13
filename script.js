@@ -1,6 +1,9 @@
 //GitHub check
-var paused=false, iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
 const tRex = document.querySelector('.t-rex');
+const gameContainer = document.querySelector('.game-container')
+var paused=false, iteration=0, badguys=[];
+var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
+
 var interval = window.setInterval(function(){
     if(!paused){
         iteration++;
@@ -46,6 +49,17 @@ var interval = window.setInterval(function(){
         }
     }
 },25);
+
+function BadGuy(x, id){
+    this.x = x;
+    var img = document.createElement('img');
+    badguys.push(img)
+    img.src="https://pedrogabe.github.io/New-Proj-minijuego/bad-red-trex-1.png"
+    img.style.position='absolute';
+    img.style.left=x+'px';
+    img.style.bottom=0;
+    gameContainer.appendChild(img);
+}
 
 window.addEventListener('keydown',function(e){
     switch(e.keyCode){
