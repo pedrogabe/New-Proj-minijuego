@@ -19,12 +19,12 @@ gameContainer.addEventListener('mouseout',function(e){
     let parentIsGameContainer = false;
     let element = e.toElement;
     while(parentIsGameContainer==false){
-        element = element.parentElement
         if(element.className=='game-container'){
             parentIsGameContainer=true;
         }else if(element==document.body){
             break;
         }
+        element = element.parentElement
         console.log(e.toElement)
     }
     if(parentIsGameContainer==false){pause()}
