@@ -13,7 +13,6 @@ body{
     position: absolute;
     left:0;
     top:0;
-    opacity: 1;
     height: 100%;
     width: 100%;
     background-color: rgba(50,255,50,0.6);
@@ -24,6 +23,7 @@ body{
 }
 
 .pause-menu a{
+    opacity: 1;
     cursor: pointer;
     transition:0.5s;
     text-decoration: none;
