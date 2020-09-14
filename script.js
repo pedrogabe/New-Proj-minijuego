@@ -25,6 +25,7 @@ gameContainer.addEventListener('mouseout',function(e){
         }else if(element==document.body){
             break;
         }
+        console.log(e.toElement)
     }
     if(parentIsGameContainer==false){pause()}
 
