@@ -15,7 +15,20 @@ function unpause(){
     paused=false;
 }
 
-gameContainer.addEventListener('mouseout',function(e){console.log(e)})
+gameContainer.addEventListener('mouseout',function(e){
+    let parentIsGameContainer = false;
+    let element = e.toElement;
+    while(parentIsGameContainer==false){
+        element = element.parentElement
+        if(element.className=='game-container'){
+            parentIsGameContainer=true;
+        }else if(element==document.body){
+            break;
+        }
+        if(parentIsGameContainer==false){pause()}
+    }
+
+})
 
 var interval = window.setInterval(function(){
     if(!paused){
@@ -30,7 +43,6 @@ var interval = window.setInterval(function(){
             }else{
                 speedUpwards-=1;
                 playerY+=speedUpwards;
-                console.log(playerY)
             }
             tRex.style.bottom=playerY+'px';
         }else
