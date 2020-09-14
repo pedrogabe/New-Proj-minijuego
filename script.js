@@ -1,8 +1,19 @@
-//GitHub check
 const tRex = document.querySelector('.t-rex');
-const gameContainer = document.querySelector('.game-container')
-var paused=false, iteration=0, badguys=[];
+const gameContainer = document.querySelector('.game-container');
+const pauseMenu = document.querySelector('.pause-menu')
+var paused=true, iteration=0, badguys=[];
 var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
+
+
+function pause(){
+    paused=true;
+    pauseMenu.style.display='flex'
+}
+
+function unpause(){
+    pauseMenu.style.display='none';
+    paused=false;
+}
 
 var interval = window.setInterval(function(){
     if(!paused){
@@ -63,9 +74,10 @@ function BadGuy(x, id){
 
 window.addEventListener('keydown',function(e){
     switch(e.keyCode){
-        case 37: direction=0; goingLeft=true; break;
-        case 39: direction=1; goingRight=true; break;
-        case 38: jumping=true;break;
+        case 37: if(!paused){e.preventDefault(); direction=0; goingLeft=true;} break;
+        case 39: if(!paused){e.preventDefault(); direction=1; goingRight=true;} break;
+        case 38: if(!paused){e.preventDefault(); jumping=true} break;
+        case 80: pause()
     }
 })
 
