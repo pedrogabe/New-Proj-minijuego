@@ -15,7 +15,7 @@ function unpause(){
     paused=false;
 }
 
-gameContainer.addEventListener('mouseout',pause)
+gameContainer.addEventListener('mouseout',function(e){console.log(e)})
 
 var interval = window.setInterval(function(){
     if(!paused){
