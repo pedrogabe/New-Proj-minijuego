@@ -7,11 +7,11 @@ var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, s
 
 function pause(){
     paused=true;
-    pauseMenu.style.opacity=1;
+    pauseMenu.style.display='flex'
 }
 
 function unpause(){
-    pauseMenu.style.opacity=0;
+    pauseMenu.style.display='none';
     paused=false;
 }
 
