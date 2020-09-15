@@ -1,7 +1,36 @@
-//GitHub check
-//GitHub branch check
-var paused=false, iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
 const tRex = document.querySelector('.t-rex');
+const gameContainer = document.querySelector('.game-container');
+const pauseMenu = document.querySelector('.pause-menu')
+var paused=true, iteration=0, badguys=[];
+var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
+
+
+function pause(){
+    paused=true;
+    pauseMenu.style.display='flex'
+}
+
+function unpause(){
+    pauseMenu.style.display='none';
+    paused=false;
+}
+
+gameContainer.addEventListener('mouseout',function(e){
+    let parentIsGameContainer = false;
+    let element = e.toElement;
+    while(parentIsGameContainer==false){
+        if(element.className=='game-container'){
+            parentIsGameContainer=true;
+        }else if(element==document.body){
+            break;
+        }
+        element = element.parentElement
+        console.log(e.toElement)
+    }
+    if(parentIsGameContainer==false){pause()}
+
+})
+
 var interval = window.setInterval(function(){
     if(!paused){
         iteration++;
@@ -15,7 +44,6 @@ var interval = window.setInterval(function(){
             }else{
                 speedUpwards-=1;
                 playerY+=speedUpwards;
-                console.log(playerY)
             }
             tRex.style.bottom=playerY+'px';
         }else
@@ -48,11 +76,23 @@ var interval = window.setInterval(function(){
     }
 },25);
 
+function BadGuy(x, id){
+    this.x = x;
+    var img = document.createElement('img');
+    badguys.push(img)
+    img.src="https://pedrogabe.github.io/New-Proj-minijuego/bad-red-trex-1.png"
+    img.style.position='absolute';
+    img.style.left=x+'px';
+    img.style.bottom=0;
+    gameContainer.appendChild(img);
+}
+
 window.addEventListener('keydown',function(e){
     switch(e.keyCode){
-        case 37: direction=0; goingLeft=true; break;
-        case 39: direction=1; goingRight=true; break;
-        case 38: jumping=true;break;
+        case 37: if(!paused){e.preventDefault(); direction=0; goingLeft=true;} break;
+        case 39: if(!paused){e.preventDefault(); direction=1; goingRight=true;} break;
+        case 38: if(!paused){e.preventDefault(); jumping=true} break;
+        case 80: pause()
     }
 })
 
