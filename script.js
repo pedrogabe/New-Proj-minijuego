@@ -1,4 +1,5 @@
 //GitHub check
+//GitHub branch check
 var paused=false, iteration=0, instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
 const tRex = document.querySelector('.t-rex');
 var interval = window.setInterval(function(){
