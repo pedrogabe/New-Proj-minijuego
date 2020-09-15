@@ -25,7 +25,6 @@ gameContainer.addEventListener('mouseout',function(e){
             break;
         }
         element = element.parentElement
-        console.log(e.toElement)
     }
     if(parentIsGameContainer==false){pause()}
 
@@ -74,18 +73,43 @@ var interval = window.setInterval(function(){
             tRex.style.left=playerX+"px";
         }
     }
+
 },25);
 
-function BadGuy(x, id){
-    this.x = x;
+function BadGuy(direction){
+    var x=0, badGuyInstance=1;
     var img = document.createElement('img');
     badguys.push(img)
-    img.src="https://pedrogabe.github.io/New-Proj-minijuego/bad-red-trex-1.png"
+    // img.src="https://pedrogabe.github.io/New-Proj-minijuego/bad-red-trex-1.png"
     img.style.position='absolute';
-    img.style.left=x+'px';
     img.style.bottom=0;
+    if(direction=='right'){
+        img.style.left=0;
+    }else{
+        img.style.right=0
+        img.style.transform='rotateY(180deg)';
+    }
     gameContainer.appendChild(img);
+    setInterval(function(){
+        if(!paused){
+            x+=5;
+            if(direction=='right'){
+                img.style.left=x+'px';
+            }else{
+                img.style.right=x+'px';
+            }
+            if(iteration/4 % 2 === 0){
+                badGuyInstance=1;
+            }else if (iteration/4 % 1 === 0){
+                badGuyInstance=2;
+            }
+            img.src="bad-red-trex-"+badGuyInstance+".png";
+            console.log(img.src)
+        }
+    },25)
+    
 }
+
 
 window.addEventListener('keydown',function(e){
     switch(e.keyCode){
