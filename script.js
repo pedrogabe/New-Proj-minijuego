@@ -2,7 +2,7 @@ const tRex = document.querySelector('.t-rex');
 const gameContainer = document.querySelector('.game-container');
 const pauseMenu = document.querySelector('.pause-menu')
 var paused=true, iteration=0, badguys=[];
-var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
+var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=0;
 
 
 function pause(){
@@ -65,12 +65,20 @@ var interval = window.setInterval(function(){
             tRex.style.transform='rotateY(180deg)';
         }
         
-        if(goingLeft==true && goingRight==false && playerX>0){
-            playerX-=5;
+        if(goingLeft==true && goingRight==false){
+            if((playerX-5)<0){
+                playerX=0;
+            }else{
+                playerX-=5;
+            }
             tRex.style.left=playerX+"px";
         }
-        if(goingLeft==false && goingRight==true && playerX<(document.body.clientWidth-tRex.width)){
-            playerX+=5;
+        if(goingLeft==false && goingRight==true){
+            if((playerX+5)>(document.body.clientWidth-tRex.width)){
+                playerX=document.body.clientWidth-tRex.width
+            }else{
+                playerX+=5;
+            }
             tRex.style.left=playerX+"px";
         }
     }
