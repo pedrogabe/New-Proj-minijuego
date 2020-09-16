@@ -79,8 +79,8 @@ var interval = window.setInterval(function(){
 function BadGuy(direction){
     var x=0, badGuyInstance=1;
     var img = document.createElement('img');
-    badguys.push(img)
-    // img.src="https://pedrogabe.github.io/New-Proj-minijuego/bad-red-trex-1.png"
+    var index = badguys.push(img)
+    index--;
     img.style.position='absolute';
     img.style.bottom=0;
     if(direction=='right'){
@@ -90,24 +90,35 @@ function BadGuy(direction){
         img.style.transform='rotateY(180deg)';
     }
     gameContainer.appendChild(img);
-    setInterval(function(){
+    var badGuyinterval = setInterval(function(){
         if(!paused){
-            x+=5;
-            if(direction=='right'){
-                img.style.left=x+'px';
+            if(x+5>document.body.clientWidth-img.width){
+                img.remove(); 
+                img=null, x=null, badGuyInstance=null, badguys[index]=null, index=null;
+                clearInterval(badGuyinterval)
+                badGuyinterval=null;
             }else{
-                img.style.right=x+'px';
+                x+=5;
+                if(direction=='right'){
+                    img.style.left=x+'px';
+                }else{
+                    img.style.right=x+'px';
+                }
+                if(iteration/4 % 2 === 0){
+                    badGuyInstance=1;
+                }else if (iteration/4 % 1 === 0){
+                    badGuyInstance=2;
+                }
+                img.src="bad-red-trex-"+badGuyInstance+".png";
             }
-            if(iteration/4 % 2 === 0){
-                badGuyInstance=1;
-            }else if (iteration/4 % 1 === 0){
-                badGuyInstance=2;
-            }
-            img.src="bad-red-trex-"+badGuyInstance+".png";
-            console.log(img.src)
         }
     },25)
-    
+    this.kill = function(){
+        img.remove(); 
+        img=null, x=null, badGuyInstance=null, badguys[index]=null, index=null;
+        clearInterval(badGuyinterval)
+        badGuyinterval=null;
+    }
 }
 
 
