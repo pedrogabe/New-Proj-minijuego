@@ -1,7 +1,7 @@
 const tRex = document.querySelector('.t-rex');
 const gameContainer = document.querySelector('.game-container');
 const pauseMenu = document.querySelector('.pause-menu')
-var paused=true, iteration=0, badguys=[];
+var paused=true, iteration=0, badguys=[], willGenerateIn_coefficient=120;
 var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=1;
 
 
@@ -72,10 +72,42 @@ var interval = window.setInterval(function(){
             playerX+=5;
             tRex.style.left=playerX+"px";
         }
+
+        if(false){
+            if(iteration%(60)===0){
+                let creationProbability = 1/Math.floor(iteration/1000)
+                console.log('Iterations:'+iteration)
+                console.log('creationProbability:'+creationProbability)
+                if(Math.random()>creationProbability){
+                    console.log(true);
+                    if(Math.random()<0.5){
+                        new BadGuy();
+                    }else{
+                        new BadGuy('right');
+                    }
+                }else{console.log(false)}
+        }
+    }
+    
+        if(iteration%(120)===0 && (willGenerateIn_coefficient-iteration) >=120 ){
+            createBadGuy()
+        }
+        if(iteration===willGenerateIn_coefficient){
+            createBadGuy();
+            willGenerateIn_coefficient += Math.floor( (60/(iteration/5))*500+Math.random()*60+40 )
+            console.log(willGenerateIn_coefficient)
+        }
     }
 
 },25);
 
+function createBadGuy(){
+    if(Math.random()<0.5){
+        new BadGuy();
+    }else{
+        new BadGuy('right')
+    }
+}
 function BadGuy(direction){
     var x=0, badGuyInstance=1;
     var img = document.createElement('img');
