@@ -29,7 +29,7 @@ gameContainer.addEventListener('mouseout',function(e){
     }
     if(parentIsGameContainer==false){pause()}
 
-})
+}) //Probablemente usar el evento mouseleave evitaría todo esta función
 
 var interval = window.setInterval(function(){
     if(!paused){
