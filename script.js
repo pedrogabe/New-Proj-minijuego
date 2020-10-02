@@ -4,6 +4,14 @@ const pauseMenu = document.querySelector('.pause-menu')
 var paused=true, iteration=0, badguys=[], willGenerateIn_coefficient=120;
 var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=0;
 
+/*debug*/
+var debug = document.createElement('p');
+debug.style.position='fixed'
+function activateDebug(){
+    document.body.appendChild(debug);
+    debug.innerHTML='Debug'
+}
+/*debug*/
 
 function pause(){
     paused=true;
@@ -107,12 +115,13 @@ var interval = window.setInterval(function(){
             console.log(willGenerateIn_coefficient)
         }
 
-        badguys.forEach(function(badguy){
+        for(index in badguys){
+            let badguy = badguys[index];
             if(badguy!=null){
-                let img = badguy.img
-                if( (img.x+img.width)>playerX && img.x<(playerX+tRex.width) && playerY<img.height){
+                let img = badguy.img;
+                if( (img.x+img.width)>playerX && img.x<(playerX+tRex.width) && playerY<img.height ){
                     console.log('collision');
-                    badguy.kill()
+                    badguy.kill();
                 }
                 badguys.forEach(function(badguy2){
                     if(badguy!=badguy2){
@@ -126,7 +135,7 @@ var interval = window.setInterval(function(){
                     }
                 })
             }
-        })
+        }
 
     }
 },25);
@@ -144,6 +153,7 @@ function BadGuy(direction){
     img.style.position='absolute';
     img.style.bottom=0;
     this.img=img;
+    var thisGuy = this;
     badguys.push(this)
     if(direction=='right'){
         img.style.left=walkedPixels;
@@ -155,10 +165,8 @@ function BadGuy(direction){
     var badGuyinterval = setInterval(function(){
         if(!paused){
             if(walkedPixels+5>document.body.clientWidth){
-                img.remove(); 
-                img=null, walkedPixels=null, badGuyInstance=null, badguys.splice([badguys.indexOf(this)],1);
-                clearInterval(badGuyinterval)
-                badGuyinterval=null;
+                thisGuy.kill()
+                console.log('badguy left')
             }else{
                 walkedPixels+=5;
                 if(direction=='right'){
@@ -177,7 +185,7 @@ function BadGuy(direction){
     },25)
     this.kill = function(){
         img.remove(); 
-        img=null, walkedPixels=null, badGuyInstance=null, badguys.splice([badguys.indexOf(this)],1);
+        img=null, walkedPixels=null, badGuyInstance=null, badguys.splice(badguys.indexOf(this),1);
         clearInterval(badGuyinterval)
         badGuyinterval=null;
     }
