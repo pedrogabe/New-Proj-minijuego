@@ -7,6 +7,7 @@ body{
     bottom:0;
     height:100%;
     width:100%;
+    overflow: hidden;
 }
 
 .pause-menu{
@@ -22,6 +23,10 @@ body{
     align-items: center;
 }
 
+.wide{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 .pause-menu a{
     opacity: 1;
     cursor: pointer;
@@ -35,6 +40,22 @@ body{
 }
 .pause-menu a:hover{
     background-color:green;
+}
+.pause-menu p{
+    margin: 5px;
+    text-align: center;
+}
+
+.pause-menu-header{
+    font-size: 1.5em;
+}
+.pause-menu-subtext{
+    font-size: 0.9em;
+    display: none;
+}
+.pause-menu-points{
+    font-size: 1.2em;
+    display: none;
 }
 
 .t-rex{
