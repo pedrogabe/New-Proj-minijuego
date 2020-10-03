@@ -1,7 +1,7 @@
 const tRex = document.querySelector('.t-rex');
 const gameContainer = document.querySelector('.game-container');
-const pauseMenu = document.querySelector('.pause-menu')
-var paused=true, iteration=0, badguys=[], willGenerateIn_coefficient=120;
+const pauseMenu = document.querySelector('.pause-menu');
+var paused=true, reset=false, iteration=0, badguys=[], willGenerateIn_coefficient=120;
 var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=0;
 
 /*debug*/
@@ -23,6 +23,9 @@ function unpause(){
     paused=false;
 }
 
+function sayToUser(text){
+    document.querySelector('.pause-menu-text').innerHTML=text
+}
 gameContainer.addEventListener('mouseout',function(e){
     let parentIsGameContainer = false;
     let element = e.toElement;
@@ -40,6 +43,17 @@ gameContainer.addEventListener('mouseout',function(e){
 
 var interval = window.setInterval(function(){
     if(!paused){
+        if(reset){
+            while(badguys.length>0){
+                badguys[0].kill()
+            }
+            iteration=0;
+            willGenerateIn_coefficient=120;
+            playerX=0;
+            playerY=0;
+            tRex.style.left=playerX+"px";
+            reset=false;
+        }
         iteration++;
         if(jumping){
             instance=1;
@@ -114,14 +128,13 @@ var interval = window.setInterval(function(){
             willGenerateIn_coefficient += Math.floor( (60/(iteration/5))*500+Math.random()*60+40 )
             console.log(willGenerateIn_coefficient)
         }
-
         for(index in badguys){
             let badguy = badguys[index];
             if(badguy!=null){
                 let img = badguy.img;
                 if( (img.x+img.width)>playerX && img.x<(playerX+tRex.width) && playerY<img.height ){
                     console.log('collision');
-                    badguy.kill();
+                    lost();
                 }
                 badguys.forEach(function(badguy2){
                     if(badguy!=badguy2){
@@ -191,13 +204,19 @@ function BadGuy(direction){
     }
 }
 
+function lost(){
+    sayToUser('Perdiste :(')
+    pause()
+    reset=true;
+}
+
 
 window.addEventListener('keydown',function(e){
     switch(e.keyCode){
         case 37: if(!paused){e.preventDefault(); direction=0; goingLeft=true;} break;
         case 39: if(!paused){e.preventDefault(); direction=1; goingRight=true;} break;
         case 38: if(!paused){e.preventDefault(); jumping=true} break;
-        case 80: pause()
+        case 80: if(!paused){sayToUser('Pausa'); pause()} break;
     }
 })
 

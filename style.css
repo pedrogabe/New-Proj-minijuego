@@ -38,6 +38,14 @@ body{
     background-color:green;
 }
 
+.pause-menu-text{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    font-size: 1.5em;
+    margin:5px;
+}
+
 .t-rex{
     position: absolute;
     left: 50vw;
