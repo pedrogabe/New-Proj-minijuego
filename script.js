@@ -17,7 +17,6 @@ function pause(){
     paused=true;
     pauseMenu.style.display='flex'
 }
-
 function unpause(){
     pauseMenu.style.display='none';
     paused=false;
@@ -224,7 +223,7 @@ window.addEventListener('keydown',function(e){
         case 37: if(!paused){e.preventDefault(); direction=0; goingLeft=true;} break;
         case 39: if(!paused){e.preventDefault(); direction=1; goingRight=true;} break;
         case 38: if(!paused){e.preventDefault(); jumping=true} break;
-        case 80: if(!paused){sayToUser('Pausa',null); pause()} break;
+        case 80: if(!paused){sayToUser('Pausa'); pause()} break;
     }
 })
 

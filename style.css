@@ -23,6 +23,10 @@ body{
     align-items: center;
 }
 
+.wide{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 .pause-menu a{
     opacity: 1;
     cursor: pointer;
@@ -43,19 +47,13 @@ body{
 }
 
 .pause-menu-header{
-    grid-column-start: 1;
-    grid-column-end: 3;
     font-size: 1.5em;
 }
 .pause-menu-subtext{
-    grid-column-start: 1;
-    grid-column-end: 3;
     font-size: 0.9em;
     display: none;
 }
 .pause-menu-points{
-    grid-column-start: 1;
-    grid-column-end: 3;
     font-size: 1.2em;
     display: none;
 }
