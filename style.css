@@ -37,13 +37,27 @@ body{
 .pause-menu a:hover{
     background-color:green;
 }
+.pause-menu p{
+    margin: 5px;
+    text-align: center;
+}
 
-.pause-menu-text{
+.pause-menu-header{
     grid-column-start: 1;
     grid-column-end: 3;
-    text-align: center;
     font-size: 1.5em;
-    margin:5px;
+}
+.pause-menu-subtext{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: 0.9em;
+    display: none;
+}
+.pause-menu-points{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: 1.2em;
+    display: none;
 }
 
 .t-rex{

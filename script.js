@@ -23,8 +23,16 @@ function unpause(){
     paused=false;
 }
 
-function sayToUser(text){
-    document.querySelector('.pause-menu-text').innerHTML=text
+function sayToUser(mainText,subtext=null){
+    document.querySelector('.pause-menu-header').innerHTML=mainText;
+    if(subtext){
+        document.querySelector('.pause-menu-subtext').style.display='unset';
+        document.querySelector('.pause-menu-subtext').innerHTML=subtext;
+    }else{
+        document.querySelector('.pause-menu-subtext').style.display='none';
+    }
+    document.querySelector('.pause-menu-points').style.display='unset';
+    document.querySelector('.pause-menu-points').innerHTML="Llegaste a hacer "+iteration+" puntos";
 }
 gameContainer.addEventListener('mouseout',function(e){
     let parentIsGameContainer = false;
@@ -205,7 +213,7 @@ function BadGuy(direction){
 }
 
 function lost(){
-    sayToUser('Perdiste :(')
+    sayToUser('Perdiste :(',"¡Chocaste con un dinosaurio enemigo!")
     pause()
     reset=true;
 }
@@ -216,7 +224,7 @@ window.addEventListener('keydown',function(e){
         case 37: if(!paused){e.preventDefault(); direction=0; goingLeft=true;} break;
         case 39: if(!paused){e.preventDefault(); direction=1; goingRight=true;} break;
         case 38: if(!paused){e.preventDefault(); jumping=true} break;
-        case 80: if(!paused){sayToUser('Pausa'); pause()} break;
+        case 80: if(!paused){sayToUser('Pausa',null); pause()} break;
     }
 })
 
