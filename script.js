@@ -199,7 +199,7 @@ function BadGuy(direction){
                 }else if (iteration/4 % 1 === 0){
                     badGuyInstance=2;
                 }
-                img.src="bad-red-trex-"+badGuyInstance+".png";
+                img.src="https://pedrogabe.github.io/Portfolio/bad-red-trex-"+badGuyInstance+".png";
             }
         }
     },25)
