@@ -1,7 +1,7 @@
 const tRex = document.querySelector('.t-rex');
 const gameContainer = document.querySelector('.game-container');
 const pauseMenu = document.querySelector('.pause-menu');
-var paused=true, reset=false, iteration=0, badguys=[], willGenerateIn_coefficient=120;
+var paused=true, reset=false, iteration=0, badguys=[], willGenerateIn_coefficient=120, kills=0;
 var instance=1, direction=1, goingLeft=false, goingRight=false, jumping=false, speedUpwards=0, playerY=0, playerX=0;
 
 /*debug*/
@@ -32,6 +32,9 @@ function sayToUser(mainText,subtext=null){
     }
     document.querySelector('.pause-menu-points').style.display='unset';
     document.querySelector('.pause-menu-points').innerHTML="Llegaste a hacer "+iteration+" puntos";
+    if(kills>0){
+        document.querySelector('.pause-menu-points').innerHTML+=" - Evitaste "+kills+" dinosuarios"
+    }
 }
 gameContainer.addEventListener('mouseout',function(e){
     let parentIsGameContainer = false;
@@ -55,6 +58,7 @@ var interval = window.setInterval(function(){
                 badguys[0].kill()
             }
             iteration=0;
+            kills=0;
             willGenerateIn_coefficient=120;
             playerX=0;
             playerY=0;
@@ -208,6 +212,7 @@ function BadGuy(direction){
         img=null, walkedPixels=null, badGuyInstance=null, badguys.splice(badguys.indexOf(this),1);
         clearInterval(badGuyinterval)
         badGuyinterval=null;
+        kills++;
     }
 }
 
