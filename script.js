@@ -238,3 +238,47 @@ window.addEventListener('keyup',function(e){
         case 39: goingRight=false;break;
     }
 })
+
+window.addEventListener('touchstart',function(e){
+        for(index in e.touches){
+            console.log(e.touches[index].clientY)
+            if(e.touches[index].clientY<(gameContainer.clientHeight/2)){
+                console.log('jump')
+                jumping=true;
+            }else{
+                if(e.touches[index].clientX<(gameContainer.clientWidth/2)){
+                    direction=0;
+                    goingLeft=true;
+                    goingRight=false;
+                }
+                else if(e.touches[index].clientX>(gameContainer.clientWidth/2)){
+                    direction=1;
+                    goingLeft=false;
+                    goingRight=true;
+                }
+            }
+        }
+})
+window.addEventListener('touchmove',function(e){
+        for(index in e.touches){
+            if(e.touches[index].clientY<document.body.clientHeight/2){
+                jumping=true;
+            }else{
+                if(e.touches[index].clientX<(document.body.clientWidth/2)){
+                    direction=0;
+                    goingLeft=true;
+                    goingRight=false;
+                }
+                else if(e.touches[index].clientX>(document.body.clientWidth/2)){
+                    direction=1;
+                    goingLeft=false;
+                    goingRight=true;
+                }
+            }
+        }
+})
+window.addEventListener('touchend',function(e){
+    if(e.touches.length==0){
+        goingRight=false,goingLeft=false;
+    }
+})
